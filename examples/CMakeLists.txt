@@ -19,7 +19,7 @@ set(COMMON_HEADERS
 if(NOT IOS)
   list(APPEND COMMON_SRC common/ScreenSaver.cpp)
   if(APPLE)
-    list(APPEND COMMON_LIBS "-framework CoreServices")
+    list(APPEND COMMON_LIBS "-framework CoreServices -framework IOKit")
   endif()
 endif()
 

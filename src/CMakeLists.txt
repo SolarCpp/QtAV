@@ -13,7 +13,7 @@ include_directories(${QTDIR}/include) #TODO: remove. use external/include
 get_filename_component(QTDIR "${QTDIR}" ABSOLUTE)
 
 list(APPEND EXTRA_INCLUDE ${QTAV_SOURCE_DIR}/external/include)
-list(APPEND EXTRA_LIBS ${CMAKE_LIBRARY_PATH_FLAG}${QTAV_SOURCE_DIR}/external/lib)
+#list(APPEND EXTRA_LIBS ${CMAKE_LIBRARY_PATH_FLAG}${QTAV_SOURCE_DIR}/external/lib)
 if(APPLE)
     if(IOS)
       #set_xcode_property(myioslib IPHONEOS_DEPLOYMENT_TARGET "8.0")
@@ -187,7 +187,7 @@ endif()
 
 set(HAVE_EGL 0)
 set(DYNAMIC_GL 0)
-set(OPENGL 0)     #desktop opengl only
+set(OPENGL 1)     #desktop opengl only
 set(OPENGLES 0)   #glesv2 only
 set(HAVE_OPENGL 1) # qt with opengl enabled. 1 of DYNAMIC_GL, OPENGL and OPENGLES is true
 #get_target_property(QtGui_location Qt5::Gui LOCATION) #dll path
@@ -324,7 +324,7 @@ endif()
 if(WIN32 OR WindowsStore OR WindowsPhone)
   check_include_files(XAudio2.h HAVE_XAUDIO2_H)
   if(NOT HAVE_XAUDIO2_H)
-    list(APPEND EXTRA_INCLUDE ${QTAV_SOURCE_DIR}/contrib/dxsdk)
+  #  list(APPEND EXTRA_INCLUDE ${QTAV_SOURCE_DIR}/contrib/dxsdk)
   endif()
   message("Qt5Gui_EGL_INCLUDE_DIRS: ${Qt5Gui_EGL_INCLUDE_DIRS}")
   list(APPEND HEADERS
@@ -494,7 +494,7 @@ set_target_properties(${MODULE} PROPERTIES
 
   VERSION ${PROJECT_VERSION}
   SOVERSION ${SO_VERSION}
-  OUTPUT_NAME ${MODULE}
+  #OUTPUT_NAME ${MODULE}
   CLEAN_DIRECT_OUTPUT 1
   #LINK_SEARCH_START_STATIC 1
   LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib

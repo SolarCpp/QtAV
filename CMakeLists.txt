@@ -28,6 +28,15 @@ option(BUILD_QT5OPENGL "Build with Qt5 OpenGL module" ON)
 
 list(APPEND CMAKE_FIND_ROOT_PATH ${QTDIR})
 
+set(EXTRA_INCLUDE ${FFMPEG_DIR}/include)
+if(WIN32)
+	set(EXTRA_LIBS ${CMAKE_LIBRARY_PATH_FLAG}${FFMPEG_DIR}/lib)
+elseif(APPLE)
+	set(EXTRA_LIBS ${CMAKE_LIBRARY_PATH_FLAG}${FFMPEG_DIR}/bin)
+endif(WIN32)
+
+find_package(Qt5 CONFIG REQUIRED 
+COMPONENTS Core Gui Widgets Qml Quick OpenGL Sql)
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Gui REQUIRED)
 get_target_property(qmake Qt5::qmake LOCATION)
@@ -94,7 +103,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
-#set(CMAKE_DEBUG_POSTFIX d)
+set(CMAKE_DEBUG_POSTFIX d)
 
 install(FILES
   cmake/FindQtAV.cmake

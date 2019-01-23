@@ -40,7 +40,7 @@ target_link_libraries(${MODULE}
   LINK_PUBLIC QtAV Qt5::Qml Qt5::Quick
 )
 set_target_properties(${MODULE} PROPERTIES
-  OUTPUT_NAME ${MODULE}
+  #OUTPUT_NAME ${MODULE}
   CLEAN_DIRECT_OUTPUT 1
   #LINK_SEARCH_START_STATIC 1
   MACOSX_RPATH ON
@@ -60,7 +60,7 @@ target_include_directories(${MODULE}
   PRIVATE ${EXTRA_INCLUDE}
   )
 target_compile_definitions(${MODULE} PRIVATE ${EXTRA_DEFS})
-set(QML_FILES qmldir Video.qml plugins.qmltypes)
+set(QML_FILES qmldir Video.qml SafeZone.qml plugins.qmltypes)
 add_custom_command(TARGET ${MODULE} POST_BUILD
   COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/bin/QtAV
   COMMAND ${CMAKE_COMMAND} -E copy_if_different ${QML_FILES} ${CMAKE_BINARY_DIR}/bin/QtAV

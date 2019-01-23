@@ -325,6 +325,9 @@ Item {
     */
     property alias autoPlay:        player.autoPlay
 
+
+    property alias outRect:         videoOut.contentRect
+
     /*!
         \qmlsignal Video::paused()
 
