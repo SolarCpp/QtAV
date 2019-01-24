@@ -28,9 +28,10 @@ option(BUILD_QT5OPENGL "Build with Qt5 OpenGL module" ON)
 
 list(APPEND CMAKE_FIND_ROOT_PATH ${QTDIR})
 
-set(EXTRA_INCLUDE ${FFMPEG_DIR}/include)
+find_package(FFMPEG REQUIRED)
+set(EXTRA_INCLUDE ${FFMPEG_INCLUDE_DIRS})
 if(WIN32)
-	set(EXTRA_LIBS ${CMAKE_LIBRARY_PATH_FLAG}${FFMPEG_DIR}/lib)
+  list(APPEND EXTRA_LIBS ${FFMPEG_LIBRARIES})
 elseif(APPLE)
 	set(EXTRA_LIBS ${CMAKE_LIBRARY_PATH_FLAG}${FFMPEG_DIR}/bin)
 endif(WIN32)
@@ -120,7 +121,7 @@ if(CMAKE_GENERATOR MATCHES "Visual Studio.*")
   if(EXISTS ${UCRT_INCLUDE})
   message("VS project. ucrt: ${UCRT_LIB}")
     include_directories(${UCRT_INCLUDE})
-    link_libraries(${CMAKE_LIBRARY_PATH_FLAG}${UCRT_LIB})
+    #link_libraries(${CMAKE_LIBRARY_PATH_FLAG}${UCRT_LIB})
   endif()
 endif()
 
@@ -139,3 +140,9 @@ if(BUILD_EXAMPLES OR BUILD_PLAYERS)
 endif()
 
 
+message("\n\n")
+include(FeatureSummary)
+feature_summary(
+  DESCRIPTION "------- FEATURE SUMMARY FOR ${PROJECT_NAME} -------"
+  WHAT ALL
+)

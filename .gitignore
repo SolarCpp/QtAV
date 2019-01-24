@@ -41,7 +41,6 @@ Makefile*
 *.lib
 *.exp
 *.exe
-*.out
 
 #vc files
 *.def
@@ -88,3 +87,4 @@ python/QtAVWidgets
 
 #cache
 *.swp
+/build-vc17/
